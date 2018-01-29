@@ -17,6 +17,10 @@ namespace CrypKey
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
+            // Test 1 
+
+            // Test 2
+
         }
     }
 }
