@@ -17,12 +17,6 @@ namespace CrypKey
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
-            // Test 1 
-
-            // Test by Akima
-
-            // Test 2
-
         }
     }
 }
