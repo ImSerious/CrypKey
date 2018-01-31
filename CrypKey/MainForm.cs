@@ -14,5 +14,18 @@ namespace CrypKey
         {
             InitializeComponent();
         }
+
+        /// <summary>
+        /// When the user click on the "Open" button.
+        /// </summary>
+        private void OpenClick(object sender, System.EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+
+            }
+        }
     }
 }
