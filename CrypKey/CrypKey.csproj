@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\PasswordEntry.cs" />
     <Compile Include="Cryptography\Tests.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
