@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using CrypKey.Dialogs;
+using System.Windows.Forms;
 
 namespace CrypKey
 {
@@ -22,8 +23,10 @@ namespace CrypKey
         /// </summary>
         private void OpenClick(object sender, System.EventArgs e)
         {
+            // Create the dialog to get the file
             OpenFileDialog dialog = new OpenFileDialog();
 
+            // If the dialog is validated by the user
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 // Save the file path
@@ -31,6 +34,15 @@ namespace CrypKey
 
                 // Enable button since we got a file
                 buttonSave.Enabled = buttonSettings.Enabled = true;
+
+                // Create the dialog to get the password
+                PasswordDialog passwordDialog = new PasswordDialog();
+
+                // IF the dialog is validated by the user
+                if (passwordDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string password = passwordDialog.Password;
+                }
             }
         }
 

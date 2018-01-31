@@ -6,21 +6,53 @@ using System.Threading.Tasks;
 
 namespace CrypKey.Core
 {
+    /// <summary>
+    /// A password entry.
+    /// </summary>
     public class PasswordEntry
     {
-        // Propriétés
-        public string passWord { get; set; }
-        public string webSite { get; set; }
-        public string note { get; set; }
+        string password;
+        string website;
+        string note;
 
-        public PasswordEntry(string PassWord,string WebSite, string Note )
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="password">Password to remember.</param>
+        /// <param name="website">Website linked to the password.</param>
+        /// <param name="note">Note for various things.</param>
+        public PasswordEntry(string password, string website, string note)
         {
-            passWord = PassWord;
-            webSite = WebSite;
-            note = Note;
+            this.password = password;
+            this.website = website;
+            this.note = note;
         }
-          
-        // Methode
 
+        /// <summary>
+        /// Get or set the password of the entry.
+        /// </summary>
+        public string Password
+        {
+            get { return password; }
+            set { password = value; }
+        }
+
+        /// <summary>
+        /// Get or set the website of the entry.
+        /// </summary>
+        public string Website
+        {
+            get { return website; }
+            set { website = value; }
+        }
+
+        /// <summary>
+        /// Get or set the note of the entry.
+        /// </summary>
+        public string Note
+        {
+            get { return note; }
+            set { note = value; }
+        }
     }
 }
