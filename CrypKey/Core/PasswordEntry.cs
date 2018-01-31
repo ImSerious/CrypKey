@@ -13,9 +13,11 @@ namespace CrypKey.Core
         public string webSite { get; set; }
         public string note { get; set; }
 
-        public PasswordEntry()
+        public PasswordEntry(string PassWord,string WebSite, string Note )
         {
-            
+            passWord = PassWord;
+            webSite = WebSite;
+            note = Note;
         }
           
         // Methode
