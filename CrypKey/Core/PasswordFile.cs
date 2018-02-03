@@ -68,9 +68,11 @@ namespace CrypKeyWPF.Core
         /// </summary>
         /// <param name="entry">Entry to encrypt.</param>
         /// <param name="index">Current index.</param>
-        public void Encrypt(PasswordEntry entry,int index)
+        public string Encrypt(PasswordEntry entry,int index)
         {
+            string encryptedEntry = "";
 
+            return encryptedEntry;
         }
 
         /// <summary>
@@ -78,9 +80,11 @@ namespace CrypKeyWPF.Core
         /// </summary>
         /// <param name="cryptedEntry">Crypted entry.</param>
         /// <param name="index">Current index.</param>
-        public void Decrypt(string cryptedEntry, int index)
+        public PasswordEntry Decrypt(string cryptedEntry, int index)
         {
+            PasswordEntry entry = null;
 
+            return entry;
         }
 
         /// <summary>
