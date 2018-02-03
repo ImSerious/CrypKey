@@ -16,13 +16,32 @@ using System.Windows.Shapes;
 namespace CrypKeyWPF
 {
     /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
+    /// Main windows of CrypKey.
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Constructor.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// Click on the Open button.
+        /// </summary>
+        private void OpenClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// Click on the Save button.
+        /// </summary>
+        private void SaveClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
