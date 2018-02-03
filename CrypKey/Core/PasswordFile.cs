@@ -70,9 +70,7 @@ namespace CrypKeyWPF.Core
         /// <param name="index">Current index.</param>
         public string Encrypt(PasswordEntry entry,int index)
         {
-            string encryptedEntry = "";
-
-            return encryptedEntry;
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -82,9 +80,7 @@ namespace CrypKeyWPF.Core
         /// <param name="index">Current index.</param>
         public PasswordEntry Decrypt(string cryptedEntry, int index)
         {
-            PasswordEntry entry = null;
-
-            return entry;
+            throw new NotImplementedException();
         }
 
         /// <summary>
