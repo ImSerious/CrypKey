@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CrypKey.Properties
+namespace CrypKeyWPF.Properties
 {
 
 

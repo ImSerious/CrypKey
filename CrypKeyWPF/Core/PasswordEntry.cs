@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CrypKey.Core
+namespace CrypKeyWPF.Core
 {
     /// <summary>
     /// A password entry.
