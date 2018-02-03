@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,14 +14,14 @@ namespace CrypKeyWPF.Core
     {
         string password;
         string note;
-        List<PasswordEntry> entries;
+        ObservableCollection<PasswordEntry> entries;
 
         /// <summary>
         /// Constructor.
         /// </summary>
         public PasswordFile()
         {
-            entries = new List<PasswordEntry>();
+            entries = new ObservableCollection<PasswordEntry>();
         }
 
         /// <summary>
@@ -90,7 +91,7 @@ namespace CrypKeyWPF.Core
         /// <returns>Loaded password file.</returns>
         public static PasswordFile Load(string path)
         {
-            PasswordFile file = null;
+            PasswordFile file = new PasswordFile();
 
             return file;
         }
@@ -125,7 +126,7 @@ namespace CrypKeyWPF.Core
         /// <summary>
         /// Get the entries of the password file.
         /// </summary>
-        public List<PasswordEntry> Entries
+        public ObservableCollection<PasswordEntry> Entries
         {
             get { return entries; }
         }

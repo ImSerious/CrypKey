@@ -1,7 +1,9 @@
 ﻿using CrypKeyWPF.Core;
+using CrypKeyWPF.Dialogs;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -24,13 +26,25 @@ namespace CrypKeyWPF
     public partial class MainWindow : Window
     {
         string pathFile;
+        PasswordFile file;
 
         /// <summary>
         /// Constructor.
         /// </summary>
         public MainWindow()
         {
+            file = new PasswordFile();
+
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// When the software is initializing.
+        /// </summary>
+        private void Initializing(object sender, EventArgs e)
+        {
+
+          //  listViewEntries.ItemsSource = file.Entries;
         }
 
         /// <summary>
@@ -42,9 +56,8 @@ namespace CrypKeyWPF
 
             if (dialog.ShowDialog() == true)
             {
+                // Save and display the complete path
                 textBoxPath.Text = pathFile = dialog.FileName;
-
-                buttonAdd.IsEnabled = buttonRemove.IsEnabled = buttonSave.IsEnabled = buttonSettings.IsEnabled = true; // Could be replaced by binding a check on PassworFile or filePath
             }
         }
 
@@ -66,7 +79,30 @@ namespace CrypKeyWPF
         /// </summary>
         private void SettingsClick(object sender, RoutedEventArgs e)
         {
-            
+
+        }
+
+        /// <summary>
+        /// Click on the Add button.
+        /// </summary>
+        private void AddClick(object sender, RoutedEventArgs e)
+        {
+            NewEntryDialog dialog = new NewEntryDialog();
+
+            if (dialog.ShowDialog() == true)
+            {
+                PasswordEntry entry = new PasswordEntry(dialog.Password, dialog.Website, dialog.Note);
+
+                file.Add(entry);
+            }
+        }
+
+        /// <summary>
+        /// Click on the Remove button.
+        /// </summary>
+        private void RemoveClick(object sender, RoutedEventArgs e)
+        {
+
         }
 
         /// <summary>
@@ -77,6 +113,14 @@ namespace CrypKeyWPF
             var test = (TextBlock)sender;
 
             Process.Start(test.Text);
+        }
+
+        /// <summary>
+        /// Current file.
+        /// </summary>
+        public PasswordFile File
+        {
+            get { return file; }
         }
     }
 }
