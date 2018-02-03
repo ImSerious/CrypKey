@@ -5,21 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CrypKeyWPF"
         mc:Ignorable="d"
-        Title="CrypKey" Height="448.497" Width="610.109" WindowStartupLocation="CenterScreen" Background="#FFB2B2B2">
+        Title="CrypKey" Height="448.497" Width="610.109" WindowStartupLocation="CenterScreen" Background="#FFB2B2B2" MinHeight="400" MinWidth="600">
     <Grid>
         <Button x:Name="buttonOpen" Content="Open..." HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="OpenClick"/>
-        <Button x:Name="buttonSave" Content="Save" Margin="102,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.046,0.828" Click="SaveClick" HorizontalAlignment="Left" Width="75"/>
+        <Button x:Name="buttonSave" Content="Save" Margin="102,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.046,0.828" Click="SaveClick" HorizontalAlignment="Left" Width="75" IsEnabled="False"/>
         <TextBox x:Name="textBoxPath" Height="23" Margin="10,47,10,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <ListView x:Name="listViewEntries" Margin="10,75,10,54">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel>
+                        <TextBlock Text="{Binding Password}" FontWeight="Bold" />
+                        <TextBlock Text=" | " />
+                        <TextBlock Text="{Binding Note}" FontWeight="Bold" />
+                        <TextBlock Text=" (" />
+                        <TextBlock Text="{Binding Website}" TextDecorations="Underline" Foreground="Blue" Cursor="Hand" PreviewMouseDown="WebsiteClick" />
+                        <TextBlock Text=")" />
+                    </WrapPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
-        <Button x:Name="buttonAdd" Content="Add" HorizontalAlignment="Left" Margin="10,0,0,24" Width="75" RenderTransformOrigin="1.046,0.828" Height="20" VerticalAlignment="Bottom"/>
-        <Button x:Name="buttonRemove" Content="Remove" HorizontalAlignment="Left" Margin="90,0,0,24" Width="75" RenderTransformOrigin="1.046,0.828" Height="20" VerticalAlignment="Bottom"/>
-        <Button x:Name="buttonSettings" Content="Settings" Margin="0,0,10,24" RenderTransformOrigin="1.046,0.828" Click="SaveClick" HorizontalAlignment="Right" Width="75" Height="20" VerticalAlignment="Bottom"/>
+        <Button x:Name="buttonAdd" Content="Add" HorizontalAlignment="Left" Margin="10,0,0,24" Width="75" RenderTransformOrigin="1.046,0.828" Height="20" VerticalAlignment="Bottom" IsEnabled="False"/>
+        <Button x:Name="buttonRemove" Content="Remove" HorizontalAlignment="Left" Margin="90,0,0,24" Width="75" RenderTransformOrigin="1.046,0.828" Height="20" VerticalAlignment="Bottom" IsEnabled="False"/>
+        <Button x:Name="buttonSettings" Content="Settings" Margin="0,0,10,24" RenderTransformOrigin="1.046,0.828" Click="SettingsClick" HorizontalAlignment="Right" Width="75" Height="20" VerticalAlignment="Bottom" IsEnabled="False"/>
 
     </Grid>
 </Window>
