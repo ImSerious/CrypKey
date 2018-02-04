@@ -76,7 +76,15 @@ namespace CrypKeyWPF
         /// </summary>
         private void SettingsClick(object sender, RoutedEventArgs e)
         {
+            SettingsDialog dialog = new SettingsDialog();
 
+            dialog.Display(file);
+
+            if (dialog.ShowDialog() == true)
+            {
+                file.Password = dialog.MasterPassword;
+                file.Note = dialog.Note;
+            }
         }
 
         /// <summary>
@@ -84,7 +92,7 @@ namespace CrypKeyWPF
         /// </summary>
         private void AddClick(object sender, RoutedEventArgs e)
         {
-            NewEntryDialog dialog = new NewEntryDialog();
+            EntryDialog dialog = new EntryDialog();
 
             if (dialog.ShowDialog() == true)
             {
@@ -99,7 +107,7 @@ namespace CrypKeyWPF
         /// </summary>
         private void RemoveClick(object sender, RoutedEventArgs e)
         {
-            if (listViewEntries.SelectedIndex > 0)
+            if (listViewEntries.SelectedIndex >= 0)
             {
                 PasswordEntry entry = listViewEntries.SelectedItem as PasswordEntry;
 
@@ -120,6 +128,30 @@ namespace CrypKeyWPF
             var test = (TextBlock)sender;
 
             Process.Start(test.Text);
+        }
+
+        /// <summary>
+        /// Double click on entries.
+        /// </summary>
+        private void EntriesDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (listViewEntries.SelectedIndex >= 0)
+            {
+                PasswordEntry entry = listViewEntries.SelectedItem as PasswordEntry;
+
+                EntryDialog dialog = new EntryDialog();
+
+                dialog.Display(entry);
+
+                if (dialog.ShowDialog() == true)
+                {
+                    entry.Password = dialog.Password;
+                    entry.Website = dialog.Website;
+                    entry.Note = dialog.Note;
+
+                    listViewEntries.ItemsSource = file.Entries.ToList();
+                }
+            }
         }
 
         /// <summary>

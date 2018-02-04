@@ -10,9 +10,7 @@
         <Button x:Name="buttonOpen" Content="Open..." HorizontalAlignment="Left" Margin="14,10,0,0" VerticalAlignment="Top" Width="75" Click="OpenClick"/>
         <Button x:Name="buttonSave" Content="Save" Margin="103,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.046,0.828" Click="SaveClick" HorizontalAlignment="Left" Width="75"/>
         <TextBox x:Name="textBoxPath" Height="23" Margin="10,47,10,0" TextWrapping="Wrap" VerticalAlignment="Top" IsReadOnly="True" Text="New file..."/>
-        <ListView x:Name="listViewEntries" Margin="10,75,10,54" ItemsSource="{Binding Path=File.Entries,
-                          RelativeSource={RelativeSource Mode=FindAncestor,
-                                                         AncestorType=Window}}" >
+        <ListView x:Name="listViewEntries" Margin="10,75,10,54" ItemsSource="{Binding Path=File.Entries, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" MouseDoubleClick="EntriesDoubleClick" >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
