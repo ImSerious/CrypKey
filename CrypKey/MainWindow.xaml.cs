@@ -107,7 +107,7 @@ namespace CrypKeyWPF
         /// </summary>
         private void RemoveClick(object sender, RoutedEventArgs e)
         {
-            if (listViewEntries.SelectedIndex >= 0)
+            if (listViewEntries.SelectedIndex != -1)
             {
                 PasswordEntry entry = listViewEntries.SelectedItem as PasswordEntry;
 
