@@ -107,7 +107,7 @@ namespace CrypKeyWPF.Cryptography
 
         /// <summary>
         /// 
-        /// </summary>
+        /// </summary>a
         public void Encryption()
         {
             int[] PasswordMaster = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 };
