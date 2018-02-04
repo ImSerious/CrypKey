@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CrypKeyWPF.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,16 +16,26 @@ using System.Windows.Shapes;
 namespace CrypKeyWPF.Dialogs
 {
     /// <summary>
-    /// Dialog for a new entry.
+    /// Dialog for settings.
     /// </summary>
-    public partial class NewEntryDialog : Window
+    public partial class SettingsDialog : Window
     {
         /// <summary>
         /// Constructor.
         /// </summary>
-        public NewEntryDialog()
+        public SettingsDialog()
         {
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// Display the settings of the file.
+        /// </summary>
+        /// <param name="file">Current password file.</param>
+        public void Display(PasswordFile file)
+        {
+            textBoxMasterPassword.Text = file.Password;
+            textBoxNote.Text = file.Note;
         }
 
         /// <summary>
@@ -36,19 +47,19 @@ namespace CrypKeyWPF.Dialogs
         }
 
         /// <summary>
-        /// Get the password.
+        /// Click on Cancel button.
         /// </summary>
-        public string Password
+        private void CancelClick(object sender, RoutedEventArgs e)
         {
-            get { return textBoxPassword.Text; }
+            this.Close();
         }
 
         /// <summary>
-        /// Get the website.
+        /// Get the master password.
         /// </summary>
-        public string Website
+        public string MasterPassword
         {
-            get { return textBoxWebsite.Text; }
+            get { return textBoxMasterPassword.Text; }
         }
 
         /// <summary>
