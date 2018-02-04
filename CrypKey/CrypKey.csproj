@@ -69,6 +69,7 @@
     </Compile>
     <Compile Include="Core\PasswordEntry.cs" />
     <Compile Include="Core\PasswordFile.cs" />
+    <Compile Include="Cryptography\Cryptography.cs" />
     <Compile Include="Dialogs\NewEntryDialog.xaml.cs">
       <DependentUpon>NewEntryDialog.xaml</DependentUpon>
     </Compile>
