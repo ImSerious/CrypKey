@@ -52,7 +52,7 @@ namespace CrypKeyWPF.Core
         /// <param name="entry">Entry to remove.</param>
         public void Remove(PasswordEntry entry)
         {
-
+            entries.Remove(entry);
         }
 
         /// <summary>

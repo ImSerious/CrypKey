@@ -33,8 +33,6 @@ namespace CrypKeyWPF
         /// </summary>
         public MainWindow()
         {
-            file = new PasswordFile();
-
             InitializeComponent();
         }
 
@@ -43,8 +41,7 @@ namespace CrypKeyWPF
         /// </summary>
         private void Initializing(object sender, EventArgs e)
         {
-
-          //  listViewEntries.ItemsSource = file.Entries;
+            file = new PasswordFile();
         }
 
         /// <summary>
@@ -102,7 +99,17 @@ namespace CrypKeyWPF
         /// </summary>
         private void RemoveClick(object sender, RoutedEventArgs e)
         {
+            if (listViewEntries.SelectedIndex > 0)
+            {
+                PasswordEntry entry = listViewEntries.SelectedItem as PasswordEntry;
 
+                file.Remove(entry);
+            }
+
+            else
+            {
+                MessageBox.Show("Please select an entry");
+            }
         }
 
         /// <summary>
