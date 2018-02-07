@@ -55,6 +55,9 @@ namespace CrypKeyWPF
             {
                 // Save and display the complete path
                 textBoxPath.Text = pathFile = dialog.FileName;
+
+                // Load the file
+                file = PasswordFile.Load(pathFile);
             }
         }
 
@@ -67,7 +70,7 @@ namespace CrypKeyWPF
 
             if (dialog.ShowDialog() == true)
             {
-
+                file.Save(dialog.FileName);
             }
         }
 
