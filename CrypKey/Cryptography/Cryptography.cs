@@ -11,7 +11,8 @@ namespace CrypKeyWPF.Cryptography
 {
     public class Cryptography
     {
-        string[] TabAlphabet;
+        string[] TabAlphabetMaj;
+        string[] TabAlphabetMin;
         int[] TabNumber;
         List<string> words;
         List<int> idValueWords;
@@ -21,7 +22,8 @@ namespace CrypKeyWPF.Cryptography
         /// </summary>
         public Cryptography()
         {
-            TabAlphabet = new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
+            TabAlphabetMaj = new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
+            TabAlphabetMin = new string[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
             TabNumber = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
             words = new List<string>();
             idValueWords = new List<int>();
@@ -40,19 +42,12 @@ namespace CrypKeyWPF.Cryptography
             {
                 // Saisie du mot de passe
                 Console.WriteLine("Veuillez saisir password");
-                string userInput = Console.ReadLine();
-                string input = userInput.ToUpper(); // Mise en majuscule
+                string input = Console.ReadLine();
 
                 // Pour chaques lettres, les stocker dans la liste de lettre de mot
                 for (int i = 0; i < input.Length; i++)
                 {
                     words.Add(input.Substring(i, 1)); // Récup à i , une lettre
-                }
-
-                Console.WriteLine("Nombre de caractère : " + words.Count);
-                foreach (string mot in words)
-                {
-                    Console.WriteLine("caractère : " + mot);
                 }
 
                 // Pour chaque lettre ou nombre de la liste, recuperer l'emplacement par rapport à la liste alphabet
@@ -62,7 +57,17 @@ namespace CrypKeyWPF.Cryptography
 
                     try
                     {
-                        for (int o = 0; o < TabAlphabet.Length; o++)
+                        for (int o = 0; o < TabAlphabetMin.Length; o++)
+                        {
+                            if (words[i] == TabAlphabetMin[o])
+                            {
+                                idValueWords.Add(o + 1);
+                                choice = true;
+                                error = false;
+                                break;
+                            }
+                        }
+                        for (int o = 0; o < TabAlphabetMaj.Length; o++)
                         {
                             if (words[i] == TabAlphabet[o])
                             {
@@ -94,15 +99,6 @@ namespace CrypKeyWPF.Cryptography
                 }
             }
             while (error == true);
-
-            Console.WriteLine();
-            Console.WriteLine("Non chiffré : ");
-            foreach (int val in idValueWords)
-            {
-                Console.Write(val + " ");
-            }
-            Console.WriteLine();
-            Console.WriteLine();
         }
 
         /// <summary>
