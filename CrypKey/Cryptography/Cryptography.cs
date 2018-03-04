@@ -17,6 +17,7 @@ namespace CrypKeyWPF.Cryptography
         private int[] TabNumber;
         private List<string> words;
         private List<int> idValueWords;
+        private int[] PasswordMaster;
 
         
         
@@ -29,7 +30,6 @@ namespace CrypKeyWPF.Cryptography
             TabAlphabetMaj = new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
             TabAlphabetMin = new string[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
             TabNumber = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-            words = new List<string>();
             idValueWords = new List<int>();
         }
 
@@ -40,55 +40,48 @@ namespace CrypKeyWPF.Cryptography
         /// <returns>wordsEncrypt is word encrypted with separated point</returns>
         public string ConvertInput(SettingsDialog entry)
         {
-            int[] PasswordMaster = new int[] { 1, 2, 3, 4, 5 ,6};
+            // Encryption key
+            PasswordMaster = new int[] { 1, 2, 3, 4, 5 ,6};
             List<string> PasswordCrypt = new List<string>();
-            // Erreur de saisie
-            bool error = true;
 
-            // Boucle d'erreur de saisie
-            do
+            // Recovery of value
+            string input = entry.MasterPassword;
+
+            try
             {
-                // Récupération du mot de passe
-                string input = entry.MasterPassword;
-                
-                try
+                // Convert password in numbers
+                foreach (char i in input)
                 {
-                    // Convert password in numbers
-                    foreach (char c in input)
+                    int convertInput = System.Convert.ToInt32(i);
+                    idValueWords.Add(convertInput);
+                }
+                // Encrypt
+                int pass = 0;
+                for (int i = 0; i < idValueWords.Count; i++)
+                {
+                    if (pass <= 5)
                     {
-                        int a = System.Convert.ToInt32(c);
-                        idValueWords.Add(a);
-                        error = false;
+                        int result = PasswordMaster[pass] + idValueWords[i];
+                        //Convert result in string for display only one word
+                        PasswordCrypt.Add(result.ToString());
+                        pass++;
                     }
-                    // Encrypt
-                    int pass = 0;
-                    for (int i = 0; i < idValueWords.Count; i++)
+                    else
                     {
-                        if (pass <= 5)
-                        {
-                            int result = PasswordMaster[pass] + idValueWords[i];
-                            //Convert result in string for display only one word
-                            PasswordCrypt.Add(result.ToString());
-                            pass++;
-                        }
-                        else
-                        {
-                            pass = 0;
-                            int result = PasswordMaster[pass] + idValueWords[i];
-                            //Convert result in string for display only one word
-                            PasswordCrypt.Add(result.ToString());
-                            pass++;
-                        }
+                        pass = 0;
+                        int result = PasswordMaster[pass] + idValueWords[i];
+                        //Convert result in string for display only one word
+                        PasswordCrypt.Add(result.ToString());
+                        pass++;
                     }
                 }
-                catch
-                {
-                    words.Clear();
-                    error = true;
-                    MessageBox.Show("Erreur inattendue, veuillez recommencer!");
-                } 
             }
-            while (error == true);
+            catch
+            {
+                idValueWords.Clear();
+                MessageBox.Show("Erreur inattendue, veuillez recommencer!");
+            }
+
             // Convert tab string in word string
             string wordsCrypted = string.Join(".", PasswordCrypt.ToArray());
             return wordsCrypted;
@@ -104,7 +97,8 @@ namespace CrypKeyWPF.Cryptography
         /// <returns>word decrypted</returns>
         public PasswordEntry Decryption(string cryptedEntry,string web, string note, int index)
         {
-            int[] PasswordMaster = new int[] { 1, 2, 3, 4, 5, 6 };
+            // Decryption key
+            PasswordMaster = new int[] { 1, 2, 3, 4, 5, 6 };
             List<int> decryptPassword = new List<int>();
             List<string> PasswordCrypt = new List<string>();
             PasswordEntry wordsCrypted = new PasswordEntry(cryptedEntry, web, note);
