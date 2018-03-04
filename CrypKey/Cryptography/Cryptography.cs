@@ -121,7 +121,7 @@ namespace CrypKeyWPF.Cryptography
             {
                 if (pass <= 5)
                 {
-                    int result = decryptPassword[i] + PasswordMaster[pass];
+                    int result = decryptPassword[i] - PasswordMaster[pass];
                     //Convert result in string for display only one word
                     PasswordCrypt.Add(result.ToString());
                     pass++;
@@ -129,7 +129,7 @@ namespace CrypKeyWPF.Cryptography
                 else
                 {
                     pass = 0;
-                    int result = PasswordMaster[pass] + idValueWords[i];
+                    int result = decryptPassword[i] - PasswordMaster[pass] ;
                     //Convert result in string for display only one word
                     PasswordCrypt.Add(result.ToString());
                     pass++;
