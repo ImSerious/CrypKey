@@ -6,19 +6,23 @@ using System.Threading.Tasks;
 using CrypKeyWPF.Core;
 using CrypKeyWPF.Dialogs;
 using System.Windows.Input;
+using System.Windows;
 
 namespace CrypKeyWPF.Cryptography
 {
     public class Cryptography
     {
-        string[] TabAlphabetMaj;
-        string[] TabAlphabetMin;
-        int[] TabNumber;
-        List<string> words;
-        List<int> idValueWords;
+        private string[] TabAlphabetMaj;
+        private string[] TabAlphabetMin;
+        private int[] TabNumber;
+        private List<string> words;
+        private List<int> idValueWords;
+
+        
+        
 
         /// <summary>
-        /// 
+        /// Constructor
         /// </summary>
         public Cryptography()
         {
@@ -32,113 +36,107 @@ namespace CrypKeyWPF.Cryptography
         /// <summary>
         /// 
         /// </summary>
-        public void UserInput()
+        /// <param name="entry"></param>
+        /// <returns>wordsEncrypt is word encrypted with separated point</returns>
+        public string ConvertInput(SettingsDialog entry)
         {
+            int[] PasswordMaster = new int[] { 1, 2, 3, 4, 5 ,6};
+            List<string> PasswordCrypt = new List<string>();
             // Erreur de saisie
             bool error = true;
 
             // Boucle d'erreur de saisie
             do
             {
-                // Saisie du mot de passe
-                Console.WriteLine("Veuillez saisir password");
-                string input = Console.ReadLine();
-
-                // Pour chaques lettres, les stocker dans la liste de lettre de mot
-                for (int i = 0; i < input.Length; i++)
+                // Récupération du mot de passe
+                string input = entry.MasterPassword;
+                
+                try
                 {
-                    words.Add(input.Substring(i, 1)); // Récup à i , une lettre
-                }
-
-                // Pour chaque lettre ou nombre de la liste, recuperer l'emplacement par rapport à la liste alphabet
-                for (int i = 0; i < words.Count; i++)
-                {
-                    bool choice = false; // Si true = lettre, si false = nombre
-
-                    try
+                    // Convert password in numbers
+                    foreach (char c in input)
                     {
-                        for (int o = 0; o < TabAlphabetMin.Length; o++)
+                        int a = System.Convert.ToInt32(c);
+                        idValueWords.Add(a);
+                        error = false;
+                    }
+                    // Encrypt
+                    int pass = 0;
+                    for (int i = 0; i < idValueWords.Count; i++)
+                    {
+                        if (pass <= 5)
                         {
-                            if (words[i] == TabAlphabetMin[o])
-                            {
-                                idValueWords.Add(o + 1);
-                                choice = true;
-                                error = false;
-                                break;
-                            }
+                            int result = PasswordMaster[pass] + idValueWords[i];
+                            //Convert result in string for display only one word
+                            PasswordCrypt.Add(result.ToString());
+                            pass++;
                         }
-                        for (int o = 0; o < TabAlphabetMaj.Length; o++)
+                        else
                         {
-                            if (words[i] == TabAlphabet[o])
-                            {
-                                idValueWords.Add(o + 1);
-                                choice = true;
-                                error = false;
-                                break;
-                            }
-                        }
-                        if (choice == false)
-                        {
-                            for (int a = 0; a < 10; a++)
-                            {
-                                if (Convert.ToInt32(words[i]) == TabNumber[a])
-                                {
-                                    idValueWords.Add(TabNumber[a]);
-                                    error = false;
-                                    break;
-                                }
-                            }
+                            pass = 0;
+                            int result = PasswordMaster[pass] + idValueWords[i];
+                            //Convert result in string for display only one word
+                            PasswordCrypt.Add(result.ToString());
+                            pass++;
                         }
                     }
-                    catch
-                    {
-                        words.Clear();
-                        error = true;
-                        Console.WriteLine("Veuillez saisir uniquement des chiffres et des lettres, caractères spéciaux interdits");
-                    }
                 }
+                catch
+                {
+                    words.Clear();
+                    error = true;
+                    MessageBox.Show("Erreur inattendue, veuillez recommencer!");
+                } 
             }
             while (error == true);
+            // Convert tab string in word string
+            string wordsCrypted = string.Join(".", PasswordCrypt.ToArray());
+            return wordsCrypted;
         }
 
         /// <summary>
-        /// 
+        /// Decryption method
         /// </summary>
-        public void Encryption()
+        /// <param name="cryptedEntry"></param>
+        /// <param name="web"></param>
+        /// <param name="note"></param>
+        /// <param name="index"></param>
+        /// <returns>word decrypted</returns>
+        public PasswordEntry Decryption(string cryptedEntry,string web, string note, int index)
         {
-            int[] PasswordMaster = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 };
-            List<int> PasswordCrypt = new List<int>();
+            int[] PasswordMaster = new int[] { 1, 2, 3, 4, 5, 6 };
+            List<int> decryptPassword = new List<int>();
+            List<string> PasswordCrypt = new List<string>();
+            PasswordEntry wordsCrypted = new PasswordEntry(cryptedEntry, web, note);
+
+            char delimiter = '.';
+            string[] substrings = cryptedEntry.Split(delimiter);
+            foreach (var i in substrings)
+            {
+                decryptPassword.Add(Convert.ToInt32(i));
+            }
+            //Decrypt
             int pass = 0;
-            for (int i = 0; i < idValueWords.Count; i++)
+            for (int i = 0; i < decryptPassword.Count; i++)
             {
                 if (pass <= 5)
                 {
-                    int result = PasswordMaster[pass] + idValueWords[i];
-                    PasswordCrypt.Add(result);
+                    int result = decryptPassword[i] + PasswordMaster[pass];
+                    //Convert result in string for display only one word
+                    PasswordCrypt.Add(result.ToString());
                     pass++;
                 }
                 else
                 {
                     pass = 0;
                     int result = PasswordMaster[pass] + idValueWords[i];
-                    PasswordCrypt.Add(result);
+                    //Convert result in string for display only one word
+                    PasswordCrypt.Add(result.ToString());
                     pass++;
                 }
             }
-
-            Console.WriteLine("Chiffré : ");
-            foreach (int val in PasswordCrypt)
-            {
-                Console.Write(val + " ");
-            }
-        }
-
-        /// <summary>
-        /// /
-        /// </summary>
-        public void decryption()
-        {
-
+            wordsCrypted.Password = string.Join("", PasswordCrypt.ToArray());
+            return wordsCrypted;
         }
     }
 }
