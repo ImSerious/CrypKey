@@ -12,25 +12,17 @@ namespace CrypKeyWPF.Cryptography
 {
     public class Cryptography
     {
-        private string[] TabAlphabetMaj;
-        private string[] TabAlphabetMin;
-        private int[] TabNumber;
-        private List<string> words;
         private List<int> idValueWords;
         private int[] PasswordMaster;
-
-        
-        
 
         /// <summary>
         /// Constructor
         /// </summary>
         public Cryptography()
         {
-            TabAlphabetMaj = new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
-            TabAlphabetMin = new string[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
-            TabNumber = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
             idValueWords = new List<int>();
+            // key
+            PasswordMaster = new int[] { 1, 2, 3, 4, 5, 6 };
         }
 
         /// <summary>
@@ -40,8 +32,6 @@ namespace CrypKeyWPF.Cryptography
         /// <returns>wordsEncrypt is word encrypted with separated point</returns>
         public string ConvertInput(SettingsDialog entry)
         {
-            // Encryption key
-            PasswordMaster = new int[] { 1, 2, 3, 4, 5 ,6};
             List<string> PasswordCrypt = new List<string>();
 
             // Recovery of value
@@ -97,8 +87,6 @@ namespace CrypKeyWPF.Cryptography
         /// <returns>word decrypted</returns>
         public PasswordEntry Decryption(string cryptedEntry,string web, string note, int index)
         {
-            // Decryption key
-            PasswordMaster = new int[] { 1, 2, 3, 4, 5, 6 };
             List<int> decryptPassword = new List<int>();
             List<string> PasswordCrypt = new List<string>();
             PasswordEntry wordsCrypted = new PasswordEntry(cryptedEntry, web, note);
