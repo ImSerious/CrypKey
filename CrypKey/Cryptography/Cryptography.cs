@@ -12,6 +12,9 @@ namespace CrypKeyWPF.Cryptography
 {
     public class Cryptography
     {
+        // Coming soon: random key + key encryption
+        // Replacement of encryption loops by six separate actions
+
         private List<int> idValueWords;
         private int[] PasswordMaster;
 
@@ -26,11 +29,11 @@ namespace CrypKeyWPF.Cryptography
         }
 
         /// <summary>
-        /// 
+        /// Encryption method
         /// </summary>
         /// <param name="entry"></param>
         /// <returns>wordsEncrypt is word encrypted with separated point</returns>
-        public string ConvertInput(SettingsDialog entry)
+        public string Encryption(SettingsDialog entry)
         {
             List<string> PasswordCrypt = new List<string>();
 
@@ -89,7 +92,7 @@ namespace CrypKeyWPF.Cryptography
         {
             List<int> decryptPassword = new List<int>();
             List<string> PasswordCrypt = new List<string>();
-            PasswordEntry wordsCrypted = new PasswordEntry(cryptedEntry, web, note);
+            PasswordEntry wordsDecrypted = new PasswordEntry(cryptedEntry, web, note);
 
             char delimiter = '.';
             string[] substrings = cryptedEntry.Split(delimiter);
@@ -117,8 +120,8 @@ namespace CrypKeyWPF.Cryptography
                     pass++;
                 }
             }
-            wordsCrypted.Password = string.Join("", PasswordCrypt.ToArray());
-            return wordsCrypted;
+            wordsDecrypted.Password = string.Join("", PasswordCrypt.ToArray());
+            return wordsDecrypted;
         }
     }
 }
